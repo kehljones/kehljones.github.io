@@ -136,69 +136,6 @@
       </div>
     </div>
 
-<script>
-  // #region agent log
-  (function() {
-    try {
-      const navEl = document.querySelector('nav');
-      const computed = navEl ? getComputedStyle(navEl) : null;
-      const hasStylesheet = !!document.querySelector('link[rel="stylesheet"][href$="styles.css"]');
-      
-      // Check parent containers for transforms/filters that break fixed positioning
-      let parentInfo = null;
-      if (navEl) {
-        let parent = navEl.parentElement;
-        const parents = [];
-        while (parent && parent !== document.body) {
-          const pStyle = getComputedStyle(parent);
-          parents.push({
-            tag: parent.tagName,
-            id: parent.id || null,
-            className: parent.className || null,
-            transform: pStyle.transform,
-            filter: pStyle.filter,
-            perspective: pStyle.perspective,
-            willChange: pStyle.willChange,
-            position: pStyle.position
-          });
-          parent = parent.parentElement;
-        }
-        parentInfo = parents;
-      }
-      
-      const navRect = navEl ? navEl.getBoundingClientRect() : null;
-      const scrollY = window.scrollY || window.pageYOffset;
-
-      fetch('http://127.0.0.1:7242/ingest/4ec9d656-4473-4ca0-997b-f1487ca50188', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          sessionId: 'debug-session',
-          runId: 'post-fix-v2',
-          hypothesisId: 'H2',
-          location: '2.2_projects_griffith.html:page-load',
-          message: 'Nav style and parent containers',
-          data: {
-            hasNav: !!navEl,
-            navPosition: computed ? computed.position : null,
-            navTop: computed ? computed.top : null,
-            navTransform: computed ? computed.transform : null,
-            navFilter: computed ? computed.filter : null,
-            navRectTop: navRect ? navRect.top : null,
-            scrollY: scrollY,
-            hasStylesheet,
-            parentContainers: parentInfo
-          },
-          timestamp: Date.now()
-        })
-      }).catch(() => { });
-    } catch (e) {
-      // Swallow logging errors
-    }
-  })();
-  // #endregion agent log
-</script>
-
     </div> <!-- end .img-bw wrapper -->
 
 </body>
