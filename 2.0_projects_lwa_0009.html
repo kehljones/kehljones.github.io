@@ -27,27 +27,58 @@
         <h2><a href="3.0_photography.html">photography</a></h2>
         <h2><a href="4.0_about.html">about</a></h2>
     </nav>
-    <main class="top-padding lr-padding white dv-pad-top">
+    <main class="top-padding lr-padding dv-pad-top pt px pb">
         <h1>0009_Shacks_Iluka</h1>
         <div>
           <a class="link" href="#jumpto-ec">_jump to exist. conditions</a>
         </div>
-        <p>SD</p>
-        <p>_preliminary site studies</p>
-        <div class="project-img">
-          <img src="/content/LWA/0009_Shacks_Iluka/drawings1&2/241004_IlukaShacks_DrawingSet_Options1&2_Page_01.jpg" alt="">
-          <img src="/content/LWA/0009_Shacks_Iluka/drawings1&2/241004_IlukaShacks_DrawingSet_Options1&2_Page_02.jpg" alt="">
-          <img src="/content/LWA/0009_Shacks_Iluka/drawings1&2/241004_IlukaShacks_DrawingSet_Options1&2_Page_03.jpg" alt="">
-          <img src="/content/LWA/0009_Shacks_Iluka/drawings1&2/241004_IlukaShacks_DrawingSet_Options1&2_Page_04.jpg" alt="">
-          <img src="/content/LWA/0009_Shacks_Iluka/drawings1&2/241004_IlukaShacks_DrawingSet_Options1&2_Page_05.jpg" alt="">
-          <img src="/content/LWA/0009_Shacks_Iluka/drawings1&2/241004_IlukaShacks_DrawingSet_Options1&2_Page_06.jpg" alt="">
-          <img src="/content/LWA/0009_Shacks_Iluka/drawings1&2/241004_IlukaShacks_DrawingSet_Options1&2_Page_07.jpg" alt="">
-          <img src="/content/LWA/0009_Shacks_Iluka/drawings1&2/241004_IlukaShacks_DrawingSet_Options1&2_Page_08.jpg" alt="">
-          <img src="/content/LWA/0009_Shacks_Iluka/drawings1&2/241004_IlukaShacks_DrawingSet_Options1&2_Page_09.jpg" alt="">
-          <img src="/content/LWA/0009_Shacks_Iluka/drawings1&2/241004_IlukaShacks_DrawingSet_Options1&2_Page_10.jpg" alt="">
-          <img src="/content/LWA/0009_Shacks_Iluka/drawings1&2/241004_IlukaShacks_DrawingSet_Options1&2_Page_11.jpg" alt="">
+        <p class="pt">_concept render</p>
+        <div class="project-img pt-2">
+          <div class="slideshow-container">
+            <div class="slide active">
+              <img src="/content/LWA/0009_Shacks_Iluka/coloured elevation/251219_46CharlesSt_ColouredElevation.webp" alt="Shacks Iluka coloured elevation">
+            </div>
+          </div>
         </div>
 
+        <p class="pt">_landscape design presentation</p>
+        <div class="project-img pt-2">
+          <div class="slideshow-container">
+            <div class="slide-wrapper">
+              <div class="slide active"><img src="/content/LWA/0009_Shacks_Iluka/landscape design/251128_46CharlesSt-Iluka_LandscapeDesign_page1.webp" alt=""></div>
+              <div class="slide"><img src="/content/LWA/0009_Shacks_Iluka/landscape design/251128_46CharlesSt-Iluka_LandscapeDesign_page2.webp" alt=""></div>
+            </div>
+            <button class="slideshow-btn prev" onclick="changeSlide(-1, 1)">‹</button>
+            <button class="slideshow-btn next" onclick="changeSlide(1, 1)">›</button>
+            <div class="slide-indicators">
+              <span class="indicator active" onclick="currentSlide(1, 1)"></span>
+              <span class="indicator" onclick="currentSlide(2, 1)"></span>
+            </div>
+          </div>
+        </div>
+
+        <p class="pt">_development approval set</p>
+        <div class="project-img pt-2">
+          <div class="slideshow-container">
+            <div class="slide-wrapper">
+              <div class="slide active"><img src="/content/LWA/0009_Shacks_Iluka/DA/260109_46CharlesSt_DASet-A3_page1.webp" alt=""></div>
+              <div class="slide"><img src="/content/LWA/0009_Shacks_Iluka/DA/260109_46CharlesSt_DASet-A3_page2.webp" alt=""></div>
+              <div class="slide"><img src="/content/LWA/0009_Shacks_Iluka/DA/260109_46CharlesSt_DASet-A3_page3.webp" alt=""></div>
+              <div class="slide"><img src="/content/LWA/0009_Shacks_Iluka/DA/260109_46CharlesSt_DASet-A3_page4.webp" alt=""></div>
+              <div class="slide"><img src="/content/LWA/0009_Shacks_Iluka/DA/260109_46CharlesSt_DASet-A3_page5.webp" alt=""></div>
+            </div>
+            <button class="slideshow-btn prev" onclick="changeSlide(-1, 2)">‹</button>
+            <button class="slideshow-btn next" onclick="changeSlide(1, 2)">›</button>
+            <div class="slide-indicators">
+              <span class="indicator active" onclick="currentSlide(1, 2)"></span>
+              <span class="indicator" onclick="currentSlide(2, 2)"></span>
+              <span class="indicator" onclick="currentSlide(3, 2)"></span>
+              <span class="indicator" onclick="currentSlide(4, 2)"></span>
+              <span class="indicator" onclick="currentSlide(5, 2)"></span>
+            </div>
+          </div>
+        </div>
+        
     </main>
 
     <button onclick="topFunction()" id="myBtn" title="Go to top">
@@ -78,6 +109,69 @@
         </script>
 
 
+<!--SLIDESHOW SCRIPT-->
+<script>
+  const slideshows = [];
+
+  function initSlideshows() {
+    const containers = document.querySelectorAll('.slideshow-container');
+    containers.forEach((container, idx) => {
+      const slides = container.getElementsByClassName('slide');
+      const indicators = container.getElementsByClassName('indicator');
+      slideshows[idx] = { index: 1, slides, indicators };
+      showSlides(1, idx);
+    });
+  }
+
+  function changeSlide(n, gallery) {
+    const ss = slideshows[gallery];
+    if (!ss) return;
+    showSlides(ss.index + n, gallery);
+  }
+
+  function currentSlide(n, gallery) {
+    showSlides(n, gallery);
+  }
+
+  function showSlides(n, gallery) {
+    const ss = slideshows[gallery];
+    if (!ss) return;
+    
+    if (n > ss.slides.length) { ss.index = 1; }
+    else if (n < 1) { ss.index = ss.slides.length; }
+    else { ss.index = n; }
+    
+    for (let i = 0; i < ss.slides.length; i++) {
+      ss.slides[i].classList.remove("active");
+    }
+    
+    for (let i = 0; i < ss.indicators.length; i++) {
+      ss.indicators[i].classList.remove("active");
+    }
+    
+    ss.slides[ss.index - 1].classList.add("active");
+    // Only update indicators if this slideshow actually has them
+    if (ss.indicators.length > 0 && ss.indicators[ss.index - 1]) {
+      ss.indicators[ss.index - 1].classList.add("active");
+    }
+  }
+  // Initialize slideshows on page load
+  document.addEventListener('DOMContentLoaded', initSlideshows);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSlideshows);
+  } else {
+    initSlideshows();
+  }
+
+  // Keyboard navigation (controls first slideshow)
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') {
+      changeSlide(-1, 0);
+    } else if (e.key === 'ArrowRight') {
+      changeSlide(1, 0);
+    }
+  });
+</script>
 
 </body>
 </html>

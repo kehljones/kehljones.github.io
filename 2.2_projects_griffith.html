@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
-<body class="projects crosshair img-bw">
+<body class="projects crosshair">
     <nav>
         <h2><a href="index.html">home</a></h2>
         <div class="dropdown">
@@ -26,6 +26,9 @@
         <h2><a href="3.0_photography.html">photography</a></h2>
         <h2><a href="4.0_about.html">about</a></h2>
     </nav>
+
+    <!-- Apply grayscale effect to page content but NOT the fixed nav -->
+    <div class="img-bw">
     <main class="top-padding lr-padding white dv-pad-top">
       <h1>Bachelors of Architecture</h1>
       <p>Griffith University</p>
@@ -39,7 +42,7 @@
   <div class="responsive">
       <div class="desc">0001_Binna_Burra_Eco_Lodge</div>
       <div class="gallery">
-        <a target="_blank" href="/2.2_projects_bachelors_0001.html">
+        <a  href="/2.2_projects_bachelors_0001.html">
           <img src="content/BACHELORS/0001_Binna_Burra_Ecolodge/3902ENV_heroshot.jpg" alt="Cinque Terre">
         </a>
 
@@ -49,7 +52,7 @@
     <div class="responsive">
       <div class="desc">0002_Kangaroo_Point_Green_Urban_Connector</div>
       <div class="gallery">
-        <a target="_blank" href="/2.2_projects_bachelors_0002.html">
+        <a  href="/2.2_projects_bachelors_0002.html">
           <img src="content/BACHELORS/0002_KP_Green_Con/3091ENV_Heroshot.png" alt="Forest">
         </a>
       </div>
@@ -58,7 +61,7 @@
     <div class="responsive">
       <div class="desc">0003_Mullumbimby_Shop-Houses</div>
       <div class="gallery">
-        <a target="_blank" href="/2.2_projects_bachelors_0003.html">
+        <a  href="/2.2_projects_bachelors_0003.html">
           <img src="content/BACHELORS/0003_Mulllum_Shop_Houses/PROJECT 03_Page_10_Heroshot.jpg" alt="Northern Lights">
         </a>
 
@@ -68,7 +71,7 @@
     <div class="responsive">
       <div class="desc">0004_Southport_Community_Hub</div>
       <div class="gallery">
-        <a target="_blank" href="/2.2_projects_bachelors_0004.html">
+        <a  href="/2.2_projects_bachelors_0004.html">
           <img src="content/BACHELORS/0004_Southport_Community_Hub/2902ENV_ArchitectureStudio3_Assessment3_KehlJones_s5183426_highquality_compressed_Page_08_Heroshot.jpg" alt="Mountains">
         </a>
       </div>
@@ -84,7 +87,7 @@
     <div class="responsive">
       <div class="desc">0005_The_Pixel_Hotel</div>
       <div class="gallery">
-        <a target="_blank" href="/2.2_projects_bachelors_0005.html">
+        <a  href="/2.2_projects_bachelors_0005.html">
           <img src="content/BACHELORS/0005_The_Pixel_Hotel/ide2_heroshot.png" alt="Cinque Terre">
         </a>
 
@@ -94,7 +97,7 @@
     <div class="responsive">
       <div class="desc">0006_Micro_Architecture</div>
       <div class="gallery">
-        <a target="_blank" href="/2.2_projects_bachelors_0006.html">
+        <a  href="/2.2_projects_bachelors_0006.html">
           <img src="content/BACHELORS/0006_Micro_Architecture/2599QCA_StructureandtheEnvironment_Assessent3_Microarchitecture_KehlJones_s5183426_Page_12_heroshot.jpg" alt="Forest">
         </a>
       </div>
@@ -103,7 +106,7 @@
     <div class="responsive">
       <div class="desc">0007_Introduction_to_Architecture</div>
       <div class="gallery">
-        <a target="_blank" href="/2.2_projects_bachelors_0007.html">
+        <a  href="/2.2_projects_bachelors_0007.html">
           <img src="content/BACHELORS/0007_Intro_to_Architecture/Assessment P1_heroshot.jpg" alt="Northern Lights">
         </a>
 
@@ -113,7 +116,7 @@
     <div class="responsive">
       <div class="desc">0008_Artist_in_Residence</div>
       <div class="gallery">
-        <a target="_blank" href="/2.2_projects_bachelors_0008.html">
+        <a  href="/2.2_projects_bachelors_0008.html">
           <img src="content/BACHELORS/0008_Artist_in_Residence/JonesKehl_Assessment_4b_Page_18_HeroShot.jpg" alt="Mountains">
         </a>
       </div>
@@ -127,12 +130,76 @@
     <div class="responsive">
       <div class="desc">0009_Construction_Materials_&_Practice</div>
       <div class="gallery">
-        <a target="_blank" href="/2.2_projects_bachelors_0009.html">
+        <a  href="/2.2_projects_bachelors_0009.html">
           <img src="content/BACHELORS/0009_Con_Mats_&_Practice/Assessment 1 hand drawn_heroShot.jpg" alt="Cinque Terre">
         </a>
-
       </div>
     </div>
+
+<script>
+  // #region agent log
+  (function() {
+    try {
+      const navEl = document.querySelector('nav');
+      const computed = navEl ? getComputedStyle(navEl) : null;
+      const hasStylesheet = !!document.querySelector('link[rel="stylesheet"][href$="styles.css"]');
+      
+      // Check parent containers for transforms/filters that break fixed positioning
+      let parentInfo = null;
+      if (navEl) {
+        let parent = navEl.parentElement;
+        const parents = [];
+        while (parent && parent !== document.body) {
+          const pStyle = getComputedStyle(parent);
+          parents.push({
+            tag: parent.tagName,
+            id: parent.id || null,
+            className: parent.className || null,
+            transform: pStyle.transform,
+            filter: pStyle.filter,
+            perspective: pStyle.perspective,
+            willChange: pStyle.willChange,
+            position: pStyle.position
+          });
+          parent = parent.parentElement;
+        }
+        parentInfo = parents;
+      }
+      
+      const navRect = navEl ? navEl.getBoundingClientRect() : null;
+      const scrollY = window.scrollY || window.pageYOffset;
+
+      fetch('http://127.0.0.1:7242/ingest/4ec9d656-4473-4ca0-997b-f1487ca50188', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId: 'debug-session',
+          runId: 'post-fix-v2',
+          hypothesisId: 'H2',
+          location: '2.2_projects_griffith.html:page-load',
+          message: 'Nav style and parent containers',
+          data: {
+            hasNav: !!navEl,
+            navPosition: computed ? computed.position : null,
+            navTop: computed ? computed.top : null,
+            navTransform: computed ? computed.transform : null,
+            navFilter: computed ? computed.filter : null,
+            navRectTop: navRect ? navRect.top : null,
+            scrollY: scrollY,
+            hasStylesheet,
+            parentContainers: parentInfo
+          },
+          timestamp: Date.now()
+        })
+      }).catch(() => { });
+    } catch (e) {
+      // Swallow logging errors
+    }
+  })();
+  // #endregion agent log
+</script>
+
+    </div> <!-- end .img-bw wrapper -->
 
 </body>
 </html>

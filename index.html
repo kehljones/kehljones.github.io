@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,24 +12,112 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <h2><a href="index.html">home</a></h2>
-        <h2><div class="dropdown">
-            <button class="dropbtn">projects
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-              <h3><a href="2.0_projects_lwa.html">larry weston architect</a></h3>
-              <h3><a href="2.1_projects_qut.html">masters_qut</a></h3>
-              <h3><a href="2.2_projects_griffith.html">bachelors_griffith</a></h3>
-            </div>
-          </div></h2>
-        <h2><a href="3.0_photography.html">photography</a></h2>
-        <h2><a href="4.0_about.html">about</a></h2>
-    </nav>
-    <header class="home-header">
+  <!-- Header will load here -->
+  <div id="header"></div>
+  
+  <!-- Your page content -->
+  <main class="index-bg pt pb px">
+    <header class="home-header white">
         <h1>Kehl Jones</h1>
-        <h2>graduate of architecture</h2>
+        <h2 class="pb-2">graduate of architecture</h2>
+      <div class="pt-2">
+        <p>_located : london</p>
+        <p>____based: brisbane (meanjin)</p>
+        <p>___phone   : (+61) 450 604 372</p>
+        <p>___email   : kehlkjones@gmail.com</p>
+      </div>
+        <div class="grid-container pt-2 pb-2">
+          <div class="column">
+            <!-- Content for the left column -->
+            <h2>Education</h2>
+            <p>_QUT Brisbane : Masters of Architecture</p>
+            <p>_Griffith University GC : Bachelors of Architectural Design</p>
+            <p>_St Augustine's College Cairns: High School OP8</p>
+          </div>
+          <div class="column">
+            <!-- Content for the right column -->
+            <h2>Career Objective</h2>
+            <p>Diligent Architectural graduate currently working in a professional capacity
+              to further develop my knowledge of Architectural design and employ the skills
+              I have learnt through my tertiary education in the real-world. Frequently
+              recognized by peers and mentors as hardworking, enthusiastic, and creative,
+              I have consistently achieved distinction grades in Architecture studio. I can
+              be relied upon to rise to the challenge of working collaboratively with your
+              employess & contribute meaningfully to projects.</p>
+          </div>
+        </div>
+        <!-- Skills -->
+        <div class="pb">
+          <h2>Skills</h2>
+          <h3 class="pt-3">Highly proficient in Autodesk Revit</h3>
+          <p>___Plans, Sections, Elevations, Details, etc.</p>
+          <p>___Complex parametric modeling</p>
+          <p>___BIM Scheduling</p>
+          <p>___BIM Management</p>
+
+          <h3 class="pt-3">Highly proficient in Adobe Suite</h3>
+          <p>___Photoshop</p>
+          <p>___Illustrator</p>
+          <p>___InDesign</p>
+          <p>___Premiere Pro</p>
+          <p>___Lightroom</p>
+        </div>
+  
+        <div  class="column-1 pt-2">
+          <div>
+            <!-- Content for the left column -->
+            <h2>Employment History</h2>
+            <h2 class="pt-2">_Larry Weston Architect : Architectural Assistant</h2>
+            <h2 class="pt-4">_September 2022 - February 2026 [3.5 years]</h2>
+            <p>_develop projects from early schematic design through to construction documentation</p>
+            <p>_prepare presentations, drawings/details, & specifications</p>
+            <p>_ensure compliance with all relevant aus standards, ncc's, & council codes</p>
+            <p>_produce and maintain detailed revit models through entire project lifecycles</p>
+            <p>_work clients, landlords, and builders to coordinate design solutions of all stages</p>
+            <p>_produce high quality architectural renderings & flythroughs, as well as, design presentations to present to clients</p>
+            <!--next job-->
+            <h2 class="pt-2">_David Toohey Architect : Internship</h2>
+            <h2 class="pt-4">_July 2021 - November 2021</h2>
+            <p>_worked on schematic design stages of a medium rise residential tower in Kangaroo Point, Brisbane</p>
+            <p>_produced detailed revit models of the building as part of the concept design for the client</p>
+            <!--next job-->
+            <h3 class="pt-2">_Muddies Cafe : Barista</h3>
+            <h3 class="pt-4">_September 2020 - January 2022</h3>
+             <!--next job-->
+            <h3 class="pt-2">_The Woolshed : Bar/Nightclub all-rounder</h3>
+            <h3 class="pt-4">_October 2019 - February 2020</h3>
+             <!--next job-->
+             <h3 class="pt-2">_McDonalds : FOH/BOH</h3>
+             <h3 class="pt-4">_April 2017 - January 2019</h3>
+          
+          </div>
+        </div>
+    
+      
+          </div>
+
+          
+    
+
     </header>
+  </main>
+  
+  <!-- Footer will load here -->
+  <div id="footer"></div>
+
+  <script>
+    // Load header
+    fetch('components.html')
+      .then(response => response.text())
+      .then(data => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(data, 'text/html');
+        document.getElementById('header').innerHTML = 
+          doc.getElementById('header-component').innerHTML;
+        document.getElementById('footer').innerHTML = 
+          doc.getElementById('footer-component').innerHTML;
+      });
+  </script>
+
 </body>
 </html>
