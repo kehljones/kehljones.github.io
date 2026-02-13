@@ -54,7 +54,7 @@
   font-size: 1.4em;
   color: rgb(255, 255, 255);
   margin-top: 0%;
-  line-height:80%;
+  line-height:110%;
 }
 
 .home-header p {
@@ -100,6 +100,8 @@ body {
     cursor: crosshair;
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    max-width: 100vw; /* Ensure body doesn't exceed viewport width */
 }
 
 
@@ -130,10 +132,13 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
+    max-width: 100vw; /* Prevent nav from exceeding viewport width */
     justify-content: space-between;
     background: rgb(0, 0, 0);
     padding: 0px 0px;
     z-index: 1000;
+    box-sizing: border-box; /* Ensure padding doesn't add to width */
+    overflow: visible; /* Allow dropdown content to show below nav */
 }
 
 nav h2 {
@@ -142,6 +147,70 @@ nav h2 {
     font-size: 1em;
     font-weight: 500;
     cursor: crosshair;
+    white-space: nowrap; /* Prevent text wrapping */
+    flex-shrink: 0; /* Prevent nav items from shrinking too much */
+    display: flex; /* Ensure h2 behaves as flex container */
+    align-items: center; /* Vertically center content */
+}
+
+/* Ensure dropdown inside nav h2 aligns properly */
+nav h2 .dropdown {
+    float: none; /* Remove float for flexbox compatibility */
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: relative; /* Required for absolute positioning of dropdown-content */
+}
+
+/* Responsive nav for mobile devices */
+@media screen and (max-width: 480px) {
+    /* Prevent horizontal scrolling at body level, not nav level */
+    body, html {
+        overflow-x: hidden !important;
+        overflow-y: auto;
+        max-width: 100vw;
+    }
+    
+    nav {
+        padding: 0px 0px;
+        overflow: visible; /* Don't clip dropdown - prevent scrolling at body level instead */
+        flex-wrap: nowrap; /* Keep items on one line */
+        align-items: center; /* Vertically center all nav items */
+    }
+    
+    nav h2 {
+        margin: 1px 4px; /* Reduce margins on small screens */
+        font-size: 0.75em; /* Smaller font on mobile */
+        flex-shrink: 1; /* Allow items to shrink if needed */
+        min-width: 0; /* Allow flex items to shrink below content size */
+        align-items: center; /* Ensure vertical centering */
+        overflow: visible; /* Allow dropdown content to show */
+    }
+    
+    /* Make dropdown button smaller on mobile and ensure alignment */
+    nav .dropdown .dropbtn {
+        font-size: 0.75em;
+        line-height: 1.2; /* Match other nav items */
+        vertical-align: middle;
+    }
+    
+    /* Ensure dropdown container aligns properly on mobile */
+    nav h2 .dropdown {
+        align-items: center;
+        display: flex;
+        position: relative; /* Required for absolute positioning of dropdown-content */
+        overflow: visible; /* Allow dropdown content to show */
+    }
+    
+    /* Ensure dropdown content is visible on mobile */
+    nav .dropdown-content {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1001;
+        overflow: visible;
+        white-space: nowrap; /* Prevent text wrapping in dropdown */
+    }
 }
 
 nav h2 a {
@@ -171,8 +240,9 @@ h3 {
   /* Dropdown container - needed to position the dropdown content */
   .dropdown {
     float: left;
-    overflow: hidden;
+    overflow: visible; /* Changed from hidden to visible so dropdown-content can show */
     cursor: crosshair;
+    position: relative; /* Required for absolute positioning of dropdown-content */
   }
   
   /* Style the dropdown button to fit inside the topnav */
@@ -186,15 +256,26 @@ h3 {
     font-family: inherit;
     margin: 0;
     cursor: crosshair;
+    line-height: inherit; /* Match line-height with other nav items */
+    display: inline-block; /* Ensure proper alignment */
+    vertical-align: baseline; /* Align with other nav text */
+  }
+  
+  /* Ensure dropdown button in nav aligns with other nav items */
+  nav .dropdown .dropbtn {
+    line-height: 1.2; /* Match nav h2 line-height */
+    vertical-align: middle;
   }
   
   /* Style the dropdown content (hidden by default) */
   .dropdown-content {
     display: none;
     position: absolute;
+    top: 100%; /* Position below the dropdown button */
+    left: 0; /* Align with left edge of dropdown */
     background-color: none;
     min-width: 0px;
-    z-index: 0;
+    z-index: 1001; /* Higher than nav z-index to appear above */
     transition: color 0.5s;
     font-weight: 500;
     text-shadow: 2px 2px 4px #7d7d7d;
@@ -240,6 +321,14 @@ h3 {
     background-color: rgb(255, 255, 255);
   }
 
+  .projects h1 {
+    overflow-wrap: break-word;
+    word-break: normal;
+    max-width: 100%;
+  }
+  .p h1 {
+    text-wrap: break-word;
+  }
 
   /* Projects Gallery */
   div.gallery {
@@ -400,6 +489,8 @@ div.project-img img {
 html, body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  max-width: 100vw; /* Ensure content doesn't exceed viewport width */
 }
 
 /* SLIDESHOW STYLES */
@@ -476,7 +567,8 @@ html, body {
 }
 
 .slideshow-btn:hover {
-  filter: invert(100);
+  color: rgb(114, 114, 114);
+  transition: color 0.5s;
 }
 
 .slideshow-btn.prev {
