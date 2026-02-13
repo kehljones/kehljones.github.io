@@ -23,6 +23,22 @@
   color: white;
 }
 
+/* Fix for mobile devices - disable fixed attachment on mobile */
+@media screen and (max-width: 768px), (hover: none) {
+  .contact-header {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+/* Additional fix for iOS Safari specifically */
+@supports (-webkit-touch-callout: none) {
+  .contact-header {
+    background-attachment: scroll;
+  }
+}
+
 /* home page text styles */
 .home-header h1 {
   font-family: 'Red Hat Display', sans-serif;
@@ -553,6 +569,23 @@ html, body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed; /* keep index background image fixed while page scrolls */
+}
+
+/* Fix for mobile devices - disable fixed attachment on mobile */
+@media screen and (max-width: 768px), (hover: none) {
+  .index-bg {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+}
+
+/* Additional fix for iOS Safari specifically */
+@supports (-webkit-touch-callout: none) {
+  .index-bg {
+    background-attachment: scroll;
+  }
 }
 
 
