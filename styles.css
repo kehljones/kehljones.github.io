@@ -230,6 +230,7 @@ h3 {
     font-family: 'Noto Sans Mono', monospace;
     font-size: 1em;
     color: rgb(0, 0, 0);
+    line-height: 110%;
 }
 
 /* Hide the link that should open and close the topnav on small screens */
@@ -496,14 +497,14 @@ html, body {
 /* SLIDESHOW STYLES */
 .slideshow-container {
   position: relative;
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
   margin: 0 auto;
   overflow: visible;
   object-fit: contain;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .slide-wrapper {
@@ -512,7 +513,8 @@ html, body {
 }
 
 .slide {
-  min-width: 100%;
+  width: fit-content;
+  max-width: 100%;
   opacity: 0;
   transition: opacity 1s ease-in-out;
   display: none;
@@ -529,13 +531,14 @@ html, body {
 
 .slide img {
   max-height: calc(100vh - 128px);
-  width: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
   display: block;
   cursor: crosshair;
   object-fit: contain;
   overflow: none;
   box-shadow: .5rem .5rem .25rem rgba(0, 0, 0, .5); /* drop shadow */
-
 }
 
 
