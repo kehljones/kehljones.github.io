@@ -128,16 +128,18 @@
   <div id="footer"></div>
 
   <script>
-    // Load header
     fetch('components.html')
       .then(response => response.text())
       .then(data => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(data, 'text/html');
-        document.getElementById('header').innerHTML = 
+        document.getElementById('header').innerHTML =
           doc.getElementById('header-component').innerHTML;
-        document.getElementById('footer').innerHTML = 
-          doc.getElementById('footer-component').innerHTML;
+        const footerTarget = document.getElementById('footer');
+        const footerSource = doc.getElementById('footer-component');
+        if (footerTarget && footerSource) {
+          footerTarget.innerHTML = footerSource.innerHTML;
+        }
       });
   </script>
 

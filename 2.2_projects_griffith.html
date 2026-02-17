@@ -11,21 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body class="projects crosshair">
-    <nav>
-        <h2><a href="index.html">home</a></h2>
-        <div class="dropdown">
-            <button class="dropbtn">projects
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-              <h3><a href="2.0_projects_lwa.html">larry weston architect</a></h3>
-              <h3><a href="2.1_projects_qut.html">masters_qut</a></h3>
-              <h3><a href="2.2_projects_griffith.html">bachelors_griffith</a></h3>
-            </div>
-          </div>
-        <h2><a href="3.0_photography.html">photography</a></h2>
-        <h2><a href="4.0_about.html">about</a></h2>
-    </nav>
+<div>
+    <!-- Header & navbar will load here -->
+    <div id="header"></div>
+</div>
 
     <!-- Apply grayscale effect to page content but NOT the fixed nav -->
     <div class="img-bw">
@@ -137,6 +126,22 @@
     </div>
 
     </div> <!-- end .img-bw wrapper -->
+
+<script>
+  fetch('components.html')
+    .then(response => response.text())
+    .then(data => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(data, 'text/html');
+      document.getElementById('header').innerHTML =
+        doc.getElementById('header-component').innerHTML;
+      const footerTarget = document.getElementById('footer');
+      const footerSource = doc.getElementById('footer-component');
+      if (footerTarget && footerSource) {
+        footerTarget.innerHTML = footerSource.innerHTML;
+      }
+    });
+</script>
 
 </body>
 </html>
