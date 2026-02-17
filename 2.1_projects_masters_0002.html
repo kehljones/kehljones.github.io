@@ -27,20 +27,31 @@
         <h2><a href="3.0_photography.html">photography</a></h2>
         <h2><a href="4.0_about.html">about</a></h2>
     </nav>
-    <main class="top-padding lr-padding white dv-pad-top">
+    <main class="top-padding lr-padding dv-pad-top pt px pb">
         <h1>DAN105_Complex_Building_Systems</h1>
+        <p class="pt-2">_drawings</p>
         <p></p>
-        <p></p>
-        <div class="project-img">
-          <img src="/content/MASTERS/DAN105 Compex Building Systems/sheets/DAN105_A2_ProfessionalPlans_Page_2.jpg" alt="">
-          <img src="/content/MASTERS/DAN105 Compex Building Systems/sheets/DAN105_A2_ProfessionalPlans_Page_3.jpg" alt="">
-          <img src="/content/MASTERS/DAN105 Compex Building Systems/sheets/DAN105_A2_ProfessionalPlans_Page_4.jpg" alt="">
-          <img src="/content/MASTERS/DAN105 Compex Building Systems/sheets/DAN105_A2_ProfessionalPlans_Page_5.jpg" alt="">
-          <img src="/content/MASTERS/DAN105 Compex Building Systems/sheets/DAN105_A2_ProfessionalPlans_Page_6.jpg" alt="">
-
+        <div class="project-img pt-4">
+          <div class="slideshow-container">
+            <div class="slide-wrapper">
+              <div class="slide active"><img src="/content/MASTERS/DAN105%20Compex%20Building%20Systems/sheets/DAN105_A2_ProfessionalPlans_Page_3.webp" alt=""></div>
+              <div class="slide"><img src="/content/MASTERS/DAN105%20Compex%20Building%20Systems/sheets/DAN105_A2_ProfessionalPlans_Page_4.webp" alt=""></div>
+              <div class="slide"><img src="/content/MASTERS/DAN105%20Compex%20Building%20Systems/sheets/DAN105_A2_ProfessionalPlans_Page_5.webp" alt=""></div>
+              <div class="slide"><img src="/content/MASTERS/DAN105%20Compex%20Building%20Systems/sheets/DAN105_A2_ProfessionalPlans_Page_6.webp" alt=""></div>
+              <div class="slide"><img src="/content/MASTERS/DAN105%20Compex%20Building%20Systems/sheets/DAN105_A2_ProfessionalPlans_Page_2.webp" alt=""></div>
+            </div>
+            <button class="slideshow-btn prev" onclick="changeSlide(-1, 0)">‹</button>
+            <button class="slideshow-btn next" onclick="changeSlide(1, 0)">›</button>
+            <div class="slide-indicators">
+              <span class="indicator active" onclick="currentSlide(1, 0)"></span>
+              <span class="indicator" onclick="currentSlide(2, 0)"></span>
+              <span class="indicator" onclick="currentSlide(3, 0)"></span>
+              <span class="indicator" onclick="currentSlide(4, 0)"></span>
+              <span class="indicator" onclick="currentSlide(5, 0)"></span>
+            </div>
+          </div>
         </div>
-        
-  
+
     </main>
 
 <!--___________Row 1 of projects____________________________________-->
@@ -71,6 +82,67 @@
     document.documentElement.scrollTop = 0;
   }
   </script>
+
+<!--SLIDESHOW SCRIPT-->
+<script>
+  const slideshows = [];
+
+  function initSlideshows() {
+    const containers = document.querySelectorAll('.slideshow-container');
+    containers.forEach((container, idx) => {
+      const slides = container.getElementsByClassName('slide');
+      const indicators = container.getElementsByClassName('indicator');
+      slideshows[idx] = { index: 1, slides, indicators };
+      showSlides(1, idx);
+    });
+  }
+
+  function changeSlide(n, gallery) {
+    const ss = slideshows[gallery];
+    if (!ss) return;
+    showSlides(ss.index + n, gallery);
+  }
+
+  function currentSlide(n, gallery) {
+    showSlides(n, gallery);
+  }
+
+  function showSlides(n, gallery) {
+    const ss = slideshows[gallery];
+    if (!ss) return;
+
+    if (n > ss.slides.length) { ss.index = 1; }
+    else if (n < 1) { ss.index = ss.slides.length; }
+    else { ss.index = n; }
+
+    for (let i = 0; i < ss.slides.length; i++) {
+      ss.slides[i].classList.remove("active");
+    }
+
+    for (let i = 0; i < ss.indicators.length; i++) {
+      ss.indicators[i].classList.remove("active");
+    }
+
+    ss.slides[ss.index - 1].classList.add("active");
+    if (ss.indicators.length > 0 && ss.indicators[ss.index - 1]) {
+      ss.indicators[ss.index - 1].classList.add("active");
+    }
+  }
+  document.addEventListener('DOMContentLoaded', initSlideshows);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSlideshows);
+  } else {
+    initSlideshows();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') {
+      changeSlide(-1, 0);
+    } else if (e.key === 'ArrowRight') {
+      changeSlide(1, 0);
+    }
+  });
+</script>
 
 </body>
 </html>

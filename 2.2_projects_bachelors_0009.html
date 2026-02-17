@@ -27,15 +27,25 @@
         <h2><a href="3.0_photography.html">photography</a></h2>
         <h2><a href="4.0_about.html">about</a></h2>
     </nav>
-    <main class="top-padding lr-padding white dv-pad-top">
+    <main class="top-padding lr-padding dv-pad-top pt px pb">
         <h1>Construction_Materials_&_Practice</h1>
         <p></p>
         <p></p>
-        <div class="project-img">
-          <img src="/content/BACHELORS/0009_Con_Mats_&_Practice/Assessment 1 hand drawn.pdf.jpg" alt="">
-          <img src="/content/BACHELORS/0009_Con_Mats_&_Practice/Assessment 3 compute and model.pdf_Page_1.jpg" alt="">
-          <img src="/content/BACHELORS/0009_Con_Mats_&_Practice/Assessment 3 compute and model.pdf_Page_2.jpg" alt="">
-
+        <div class="project-img pt">
+          <div class="slideshow-container">
+            <div class="slide-wrapper">
+              <div class="slide active"><img src="/content/BACHELORS/0009_Con_Mats_%26_Practice/Assessment%201%20hand%20drawn.pdf.jpg" alt=""></div>
+              <div class="slide"><img src="/content/BACHELORS/0009_Con_Mats_%26_Practice/Assessment%203%20compute%20and%20model.pdf_Page_1.jpg" alt=""></div>
+              <div class="slide"><img src="/content/BACHELORS/0009_Con_Mats_%26_Practice/Assessment%203%20compute%20and%20model.pdf_Page_2.jpg" alt=""></div>
+            </div>
+            <button class="slideshow-btn prev" onclick="changeSlide(-1, 0)">‹</button>
+            <button class="slideshow-btn next" onclick="changeSlide(1, 0)">›</button>
+            <div class="slide-indicators">
+              <span class="indicator active" onclick="currentSlide(1, 0)"></span>
+              <span class="indicator" onclick="currentSlide(2, 0)"></span>
+              <span class="indicator" onclick="currentSlide(3, 0)"></span>
+            </div>
+          </div>
         </div>
         
   
@@ -69,6 +79,55 @@
     document.documentElement.scrollTop = 0;
   }
   </script>
+
+<!--SLIDESHOW SCRIPT-->
+<script>
+  const slideshows = [];
+  function initSlideshows() {
+    const containers = document.querySelectorAll('.slideshow-container');
+    containers.forEach((container, idx) => {
+      const slides = container.getElementsByClassName('slide');
+      const indicators = container.getElementsByClassName('indicator');
+      slideshows[idx] = { index: 1, slides, indicators };
+      showSlides(1, idx);
+    });
+  }
+  function changeSlide(n, gallery) {
+    const ss = slideshows[gallery];
+    if (!ss) return;
+    showSlides(ss.index + n, gallery);
+  }
+  function currentSlide(n, gallery) {
+    showSlides(n, gallery);
+  }
+  function showSlides(n, gallery) {
+    const ss = slideshows[gallery];
+    if (!ss) return;
+    if (n > ss.slides.length) { ss.index = 1; }
+    else if (n < 1) { ss.index = ss.slides.length; }
+    else { ss.index = n; }
+    for (let i = 0; i < ss.slides.length; i++) {
+      ss.slides[i].classList.remove("active");
+    }
+    for (let i = 0; i < ss.indicators.length; i++) {
+      ss.indicators[i].classList.remove("active");
+    }
+    ss.slides[ss.index - 1].classList.add("active");
+    if (ss.indicators.length > 0 && ss.indicators[ss.index - 1]) {
+      ss.indicators[ss.index - 1].classList.add("active");
+    }
+  }
+  document.addEventListener('DOMContentLoaded', initSlideshows);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSlideshows);
+  } else {
+    initSlideshows();
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') { changeSlide(-1, 0); }
+    else if (e.key === 'ArrowRight') { changeSlide(1, 0); }
+  });
+</script>
 
 </body>
 </html>
